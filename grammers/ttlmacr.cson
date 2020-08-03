@@ -1,0 +1,11 @@
+'scopeName': 'source.ttlmacro'
+'name': 'TTLMacro'
+'fileTypes': ['ttl']
+
+'patterns': [
+    {
+      'begin': '/*''
+      'end': '*/''
+      'name': 'string.quoted.single.mylanguage'
+    },
+]

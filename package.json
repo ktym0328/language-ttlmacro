@@ -1,0 +1,17 @@
+{
+  "name": "language-ttlmacro-ktym",
+  "version": "0.0.0",
+  "description": "TTLMacro support in Atom",
+  "engines": {
+    "atom": "*"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ktym0328/language-ttlmacro-ktym.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ktym0328/language-ttlmacro-ktym/issues"
+  },
+  "license": "MIT"
+}
