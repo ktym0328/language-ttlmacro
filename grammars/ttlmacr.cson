@@ -3,9 +3,13 @@
 'fileTypes': ['ttl']
 
 'patterns': [
-    {
-      'begin': '/*''
-      'end': '*/''
-      'name': 'string.quoted.single.mylanguage'
-    },
+  {
+    # comment
+    'match': '\s*;.*$'
+    'name': 'comment.line.number-sign.ttlmacro'
+  }
+  {
+    'match': 'filenamebox|messagebox'
+    'name': 'entity.name.function.markup.bold.ttlmacro'
+  }
 ]
