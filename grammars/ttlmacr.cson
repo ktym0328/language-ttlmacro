@@ -4,12 +4,73 @@
 
 'patterns': [
   {
-    # comment
-    'match': '\s*;.*$'
-    'name': 'comment.line.number-sign.ttlmacro'
+    'include': '#comment'
   }
   {
-    'match': 'filenamebox|messagebox'
-    'name': 'entity.name.function.markup.bold.ttlmacro'
+    'include': '#variables'
+  }
+  {
+    'include': '#functions'
+  }
+  {
+    #ラベル行
+    'match': '^:.*$'
+    'name': 'entity.name.tag.ttlmacro'
   }
 ]
+'repository':
+  'comment':
+    'patterns': [
+        {
+          #コメント行
+          'match': '\s*;.*$'
+          'name': 'comment.line.number-sign.ttlmacro'
+        }
+        {
+          #コメントブロック
+          'begin': '/\\*'
+          'end': '\\*/'
+          'name': 'comment.block.ttlmacro'
+        }
+    ]
+  'functions':
+    'patterns': [
+      {
+        #通信コマンド、sendとwaitについては記載順を後ろにする（regexがfirstmatchのため)
+        'match': '^(bplusrecv|bplussend|callmenu|changedir|clearscreen|closett|connect|cygconnect|disconnect|dispstr|enablekeyb|flushrecv|gethostname|getmodemstatus|gettitle|kmtfinish|kmtget|kmtrecv|kmtsend|loadkeymap|logautoclosemode|logclose|loginfo|logopen|logpause|logrotate|logstart|logwrite|quickvanrecv|quickvansend|recvln|restoresetup|scprecv|scpsend|sendbreak|sendbroadcast|sendfile|sendkcode|sendln|sendlnbroadcast|sendlnmulticast|sendmulticast|send|setbaud|setdebug|setdtr|setecho|setflowctrl|setmulticastname|setrts|setspeed|setsync|settitle|showtt|testlink|unlink|wait4all|waitevent|waitln|waitn|waitrecv|waitregex|wait|xmodemrecv|xmodemsend|ymodemrecv|ymodemsend|zmodemrecv|zmodemsend)'
+        'captures':
+          '1':
+            'name':  'entity.name.function.markup.bold.ttlmacro'
+      }
+      {
+        #制御コマンド、if,end記載順を後ろにする
+        'match': '\\b(break|call|continue|do|loop|execcmnd|exit|for|next|goto|then|elseif|else|endif|if|include|mpause|pause|return|until|enduntil|while|endwhile|end)\\b'
+        'captures':
+          '1':
+            'name':  'entity.name.function.markup.bold.ttlmacro'
+      }
+      {
+        'match': '^(filenamebox|messagebox)'
+        'captures':
+          '1':
+            'name': 'entity.name.function.markup.bold.ttlmacro'
+      }
+    ]
+  'variables':
+    'patterns': [
+      {
+        #システム変数
+        'match': '\\b(groupmatchstr[1-9]|inputstr|matchstr|param[1-9]|params|paramcnt|result|timeout|mtimeout)\\b'
+        'captures':
+          '1':
+            'name': 'entity.markup.italic.support.variable.ttlmacro'
+      }
+      {
+        'match': '^([a-zA-Z]|_)([a-zA-Z0-9]|_)(\b*=)'
+        'captures':
+          '1':
+            'name': 'entity.markup.bold.support.variable.ttlmacro'
+          '2':
+            'name': 'entity.markup.bold.support.variable.ttlmacro'
+      }
+    ]
