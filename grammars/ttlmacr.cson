@@ -88,15 +88,22 @@
             'name': 'markup.italic.support.variable.ttlmacro'
       }
       {
-        'match': '((\\l|\\u|_)\\w*)(\b=)'
+        #クォート内は変数以外としてquoto表記にする
+        'begin': '\'|\"'
+        'end': '\'|\"'
+        'contentName': 'markup.quote.variable.ttlmacro'
+      }
+      {
+        #16進数も変数以外として扱う
+        'match': '#([0-9A-F]|[0-9a-f])*'
+        'name': 'markup.quote.variable.ttlmacro'
+      }
+      {
+        'match': '([a-zA-Z]|_)(([a-zA-Z0-9]|_)*)\\b'
         'captures':
           '1':
-            'name': 'markup.bold.italic.support.variable.ttlmacro'
+            'name': 'markup.italic.support.variable.ttlmacro'
           '2':
-            'name': 'markup.bold.italic.support.variable.ttlmacro'
-          '3':
-            'name': 'markup.bold.italic.underline.support.variable.ttlmacro'
-          '4':
-            'name': 'markup.bold.italic.support.variable.ttlmacro'
+            'name': 'markup.italic.support.variable.ttlmacro'
       }
     ]
