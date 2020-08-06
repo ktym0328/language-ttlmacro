@@ -7,10 +7,10 @@
     'include': '#comment'
   }
   {
-    'include': '#variables'
+    'include': '#functions'
   }
   {
-    'include': '#functions'
+    'include': '#variables'
   }
   {
     #ラベル行
@@ -37,7 +37,7 @@
     'patterns': [
       {
         #通信コマンド、sendとwaitについては記載順を後ろにする（regexがfirstmatchのため)
-        'match': '^(bplusrecv|bplussend|callmenu|changedir|clearscreen|closett|connect|cygconnect|disconnect|dispstr|enablekeyb|flushrecv|gethostname|getmodemstatus|gettitle|kmtfinish|kmtget|kmtrecv|kmtsend|loadkeymap|logautoclosemode|logclose|loginfo|logopen|logpause|logrotate|logstart|logwrite|quickvanrecv|quickvansend|recvln|restoresetup|scprecv|scpsend|sendbreak|sendbroadcast|sendfile|sendkcode|sendln|sendlnbroadcast|sendlnmulticast|sendmulticast|send|setbaud|setdebug|setdtr|setecho|setflowctrl|setmulticastname|setrts|setspeed|setsync|settitle|showtt|testlink|unlink|wait4all|waitevent|waitln|waitn|waitrecv|waitregex|wait|xmodemrecv|xmodemsend|ymodemrecv|ymodemsend|zmodemrecv|zmodemsend)'
+        'match': '\\b(bplusrecv|bplussend|callmenu|changedir|clearscreen|closett|connect|cygconnect|disconnect|dispstr|enablekeyb|flushrecv|gethostname|getmodemstatus|gettitle|kmtfinish|kmtget|kmtrecv|kmtsend|loadkeymap|logautoclosemode|logclose|loginfo|logopen|logpause|logrotate|logstart|logwrite|quickvanrecv|quickvansend|recvln|restoresetup|scprecv|scpsend|sendbreak|sendbroadcast|sendfile|sendkcode|sendln|sendlnbroadcast|sendlnmulticast|sendmulticast|send|setbaud|setdebug|setdtr|setecho|setflowctrl|setmulticastname|setrts|setspeed|setsync|settitle|showtt|testlink|unlink|wait4all|waitevent|waitln|waitn|waitrecv|waitregex|wait|xmodemrecv|xmodemsend|ymodemrecv|ymodemsend|zmodemrecv|zmodemsend)\\b'
         'captures':
           '1':
             'name':  'entity.name.function.markup.bold.ttlmacro'
@@ -50,7 +50,29 @@
             'name':  'entity.name.function.markup.bold.ttlmacro'
       }
       {
-        'match': '^(filenamebox|messagebox)'
+        #文字列コマンド
+        'match': '\\b(code2str|expandenv|int2str|regexoption|sprintf|sprintf2|str2code|str2int|strcompare|strconcat|strcopy|strinsert|strjoin|strlen|strmatch|strremove|strreplace|strscan|strspecial|strsplit|strtrim|tolower|toupper)\\b'
+        'captures':
+          '1':
+            'name': 'entity.name.function.markup.bold.ttlmacro'
+      }
+      {
+        #ファイル操作コマンド
+        'match': '\\b(basename|dirname|fileclose|fileconcat|filecopy|filecreate|filedelete|filelock|filemarkptr|fileopen|filereadln|fileread|filerename|filesearch|fileseek|fileseekback|filestat|filestrseek|filestrseek2|filetruncate|fileunlock|filewrite|filewriteln|findfirst|findnext|findclose|foldercreate|folderdelete|foldersearch|getdir|getfileattr|makepath|setdir|setfileattr)\\b'
+        'captures':
+          '1':
+            'name': 'entity.name.function.markup.bold.ttlmacro'
+      }
+      {
+        #パスワードコマンド
+        'match': '\\b(delpassword|getpassword|ispassword|passwordbox|setpassword)\\b'
+        'captures':
+          '1':
+            'name': 'entity.name.function.markup.bold.ttlmacro'
+      }
+      {
+        #その他のコマンド
+        'match': '\\b(beep|bringupbox|checksum8|checksum8file|checksum16|checksum16file|checksum32|checksum32file|closesbox|clipb2var|crc16|crc16file|crc32|crc32file|exec|dirnamebox|filenamebox|getdate|getenv|getipv4addr|getipv6addr|getspecialfolder|gettime|getttdir|getver|ifdefined|inputbox|intdim|listbox|messagebox|random|rotateleft|rotateright|setdate|setdlgpos|setenv|setexitcode|settime|show|statusbox|strdim|uptime|var2clipb|yesnobox)\\b'
         'captures':
           '1':
             'name': 'entity.name.function.markup.bold.ttlmacro'
@@ -63,14 +85,18 @@
         'match': '\\b(groupmatchstr[1-9]|inputstr|matchstr|param[1-9]|params|paramcnt|result|timeout|mtimeout)\\b'
         'captures':
           '1':
-            'name': 'entity.markup.italic.support.variable.ttlmacro'
+            'name': 'markup.italic.support.variable.ttlmacro'
       }
       {
-        'match': '^([a-zA-Z]|_)([a-zA-Z0-9]|_)(\b*=)'
+        'match': '((\\l|\\u|_)\\w*)(\b=)'
         'captures':
           '1':
-            'name': 'entity.markup.bold.support.variable.ttlmacro'
+            'name': 'markup.bold.italic.support.variable.ttlmacro'
           '2':
-            'name': 'entity.markup.bold.support.variable.ttlmacro'
+            'name': 'markup.bold.italic.support.variable.ttlmacro'
+          '3':
+            'name': 'markup.bold.italic.underline.support.variable.ttlmacro'
+          '4':
+            'name': 'markup.bold.italic.support.variable.ttlmacro'
       }
     ]
